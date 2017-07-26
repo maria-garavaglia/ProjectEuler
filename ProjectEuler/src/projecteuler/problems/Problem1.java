@@ -17,16 +17,36 @@
 package projecteuler.problems;
 
 /**
+ * @Number: 1
+ * @Title: Multiples of 3 and 5
+ * @Description: "If we list all the natural numbers below 10 that are multiples
+ * of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Find the
+ * sum of all the multiples of 3 or 5 below 1000."
+ * @Link: https://projecteuler.net/problem=1
  *
  * @author tyler.garavaglia
  */
-public class Problem1 {
+public class Problem1 implements EulerSolvable {
 
     public Problem1() {
 
     }
 
-    public void execute() {
+    @Override
+    public void printHeader() {
 
+    }
+
+    @Override
+    public void execute() {
+        int sum = 0;
+
+        for (int count = 1; count < 1000; count++) {
+            if (count % 3 == 0 || count % 5 == 0) {
+                sum += count;
+            }
+        }
+
+        System.out.println("Result: " + sum);
     }
 }
