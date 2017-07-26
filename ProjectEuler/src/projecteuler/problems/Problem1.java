@@ -34,7 +34,8 @@ public class Problem1 implements EulerSolvable {
 
     @Override
     public void printHeader() {
-
+        System.out.println("Problem 1: Multiples of 3 and 5");
+        System.out.println("Task: Find the sum of all the multiples of 3 or 5 below 1000");
     }
 
     @Override
