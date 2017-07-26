@@ -20,6 +20,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import projecteuler.problems.EulerSolvable;
 import projecteuler.problems.Problem1;
+import projecteuler.problems.Problem2;
 
 /**
  *
@@ -27,7 +28,7 @@ import projecteuler.problems.Problem1;
  */
 public class ProjectEuler {
 
-    private static final int TOTAL_PROBLEMS = 1;
+    private static final int TOTAL_PROBLEMS = 2;
 
     /**
      * @param args the command line arguments
@@ -76,6 +77,8 @@ public class ProjectEuler {
         switch (probNumber) {
             case 1:
                 return new Problem1();
+            case 2:
+                return new Problem2();
             default:
                 System.out.println("ERROR: You shouldn't get here.");
                 return null;
