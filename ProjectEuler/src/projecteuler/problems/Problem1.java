@@ -21,5 +21,12 @@ package projecteuler.problems;
  * @author tyler.garavaglia
  */
 public class Problem1 {
-    
+
+    public Problem1() {
+
+    }
+
+    public void execute() {
+
+    }
 }
