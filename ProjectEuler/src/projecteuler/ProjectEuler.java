@@ -18,6 +18,7 @@ package projecteuler;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import projecteuler.problems.EulerSolvable;
 import projecteuler.problems.Problem1;
 
 /**
@@ -64,15 +65,20 @@ public class ProjectEuler {
             }
         }
 
-        switch (probNumber) {
-            case 1:
-                new Problem1().execute();
-                break;
-            default:
-                System.out.println("ERROR: You shouldn't get here. Quitting...");
-                System.exit(1);
+        EulerSolvable problem = getProblem(probNumber);
+        if (problem != null) {
+            problem.printHeader();
+            problem.execute();
         }
-
     }
 
+    public static EulerSolvable getProblem(int probNumber) {
+        switch (probNumber) {
+            case 1:
+                return new Problem1();
+            default:
+                System.out.println("ERROR: You shouldn't get here.");
+                return null;
+        }
+    }
 }
