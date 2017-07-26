@@ -35,41 +35,57 @@ public class ProjectEuler {
      */
     public static void main(String[] args) {
         // simple(ish) CLI to display problems
-
-        Scanner sysIn = new Scanner(System.in);
-
-        boolean validNumber = false;
-        int probNumber = -1;
-        while (!validNumber) {
-            System.out.print("Enter a problem number, or 0 to quit: ");
-
+        if (args.length > 0) {
+            int probNumber = -1;
             try {
-                if (sysIn.hasNext()) {
-                    probNumber = sysIn.nextInt();
+                probNumber = Integer.parseInt(args[0]);
+            } catch (NumberFormatException ex) {
+                System.out.print("ERROR: Non-integer argument given.");
+                System.exit(1);
+            }
+
+            EulerSolvable problem = getProblem(probNumber);
+            if (problem != null) {
+                problem.printHeader();
+                problem.execute();
+            }
+        } else {
+
+            Scanner sysIn = new Scanner(System.in);
+
+            boolean validNumber = false;
+            int probNumber = -1;
+            while (!validNumber) {
+                System.out.print("Enter a problem number, or 0 to quit: ");
+
+                try {
+                    if (sysIn.hasNext()) {
+                        probNumber = sysIn.nextInt();
+                    }
+                } catch (InputMismatchException ex) {
+                    System.out.println("ERROR: Not a number.");
+                    sysIn.nextLine();
+                    continue;
                 }
-            } catch (InputMismatchException ex) {
-                System.out.println("ERROR: Not a number.");
-                sysIn.nextLine();
-                continue;
+
+                // Quit early
+                if (probNumber == 0) {
+                    System.out.println("Quitting...");
+                    System.exit(0);
+                }
+
+                if (probNumber > 0 && probNumber <= TOTAL_PROBLEMS) {
+                    validNumber = true;
+                } else {
+                    System.out.println("ERROR: That problem hasn't been solved yet.");
+                }
             }
 
-            // Quit early
-            if (probNumber == 0) {
-                System.out.println("Quitting...");
-                System.exit(0);
+            EulerSolvable problem = getProblem(probNumber);
+            if (problem != null) {
+                problem.printHeader();
+                problem.execute();
             }
-
-            if (probNumber > 0 && probNumber <= TOTAL_PROBLEMS) {
-                validNumber = true;
-            } else {
-                System.out.println("ERROR: That problem hasn't been solved yet.");
-            }
-        }
-
-        EulerSolvable problem = getProblem(probNumber);
-        if (problem != null) {
-            problem.printHeader();
-            problem.execute();
         }
     }
 
