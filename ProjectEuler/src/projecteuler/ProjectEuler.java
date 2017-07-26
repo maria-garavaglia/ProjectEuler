@@ -16,6 +16,7 @@
  */
 package projecteuler;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import projecteuler.problems.Problem1;
 
@@ -31,7 +32,7 @@ public class ProjectEuler {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // simple CLI to display problems
+        // simple(ish) CLI to display problems
 
         Scanner sysIn = new Scanner(System.in);
 
@@ -39,7 +40,16 @@ public class ProjectEuler {
         int probNumber = -1;
         while (!validNumber) {
             System.out.print("Enter a problem number, or 0 to quit: ");
-            probNumber = sysIn.nextInt();
+
+            try {
+                if (sysIn.hasNext()) {
+                    probNumber = sysIn.nextInt();
+                }
+            } catch (InputMismatchException ex) {
+                System.out.println("ERROR: Not a number.");
+                sysIn.nextLine();
+                continue;
+            }
 
             // Quit early
             if (probNumber == 0) {
